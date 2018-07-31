@@ -41,6 +41,7 @@ def seccionar(intervalo, particiones, tolerancia):
 	cantidad_iteraciones = 1
 	separaciones = secc(intervalo[0], intervalo[1], particiones)
 	Xr_actual = round((separaciones[0]+separaciones[len(separaciones)-1])/2, 8)
+	error_comparacion = -1
 	#do_while emulado
 	conta = 1
 	while True:
@@ -59,6 +60,9 @@ def seccionar(intervalo, particiones, tolerancia):
 
 		Xr_actual = round((separaciones[0]+separaciones[len(separaciones)-1])/2, 8)
 		error_p = abs(round(((Xr_actual - Xr_anterior)/Xr_actual)*100, 8))
+		if(error_p/error_comparacion > 0):
+			print("K=", round(error_p/error_comparacion), 8)
+		error_comparacion = error_p
 		if(error_p <= tolerancia):
 			return [Xr_actual, cantidad_iteraciones, error_p]
 
@@ -68,7 +72,7 @@ intervalo = [12, 16]
 tolerancia = 1 #1%
 print("Intervalo de 12 a 16")
 #3 secciones
-cantidad_secciones = 3
+cantidad_secciones = 2
 resultados = seccionar(intervalo, cantidad_secciones, tolerancia) #La tolerancia se mide en porcentajes
 print(cantidad_secciones, "secciones")
 print("\tXr:", resultados[0])
