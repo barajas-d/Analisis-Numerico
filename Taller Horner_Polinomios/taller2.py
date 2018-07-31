@@ -17,7 +17,6 @@ def raiz(polinomio, rango, paso, redondeo):
         datos = polinomio[:]
         inicio = round(inicio + paso, redondeo)
         evaluacion = horner(inicio, datos, redondeo, [0])
-        print(inicio)
         if(evaluacion == 0):
             fin.append(inicio)
     return fin
@@ -25,8 +24,7 @@ def raiz(polinomio, rango, paso, redondeo):
 
 #Datos Base
 polinomio = [4, 4, 4, 4, 4, 4, 4, 4, 1] #Polinomio de tal forma que L[0] = 4*x^0, L[1] = 4*x^1, ..., L[n] = 4*x^n
-polinomio2 = [2,2,-1]
 rango = [-2, 2] #Rango de valores en los que se buscan las raices
-redondeo = 3 #valor de redondeo
+redondeo = 4 #valor de redondeo
 paso = 1*(10**-redondeo) #valor de redondeo
-print(raiz(polinomio2, rango, paso, redondeo))
+print(raiz(polinomio, rango, paso, redondeo))
