@@ -66,7 +66,7 @@ def seccionar(intervalo, particiones, tolerancia):
 
 intervalo = [12, 16]
 tolerancia = 1 #1%
-print("Intervalo de 10 a 20")
+print("Intervalo de 12 a 16")
 #3 secciones
 cantidad_secciones = 3
 resultados = seccionar(intervalo, cantidad_secciones, tolerancia) #La tolerancia se mide en porcentajes
