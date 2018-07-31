@@ -1,5 +1,4 @@
 import math
-import timeit
 
 def funcion(x):
 	return round((((9.8*68.1)/x)*(1-math.exp(-(x/68.1)*10))-40), 8)
@@ -14,8 +13,10 @@ def secc(x, y, particiones):
 	#print("ESTE ES FIN:", fin)
 	return fin
 
+
 def n_seccionar(intervalo, particiones, cantidad_iteraciones):
 	separaciones = secc(intervalo[0], intervalo[1], particiones)
+	#print("SEPARA:", separaciones)
 	#caso Base
 	for i in range(0, len(separaciones)):
 		if(abs(funcion(separaciones[i])) <= 0.00000001):
@@ -35,15 +36,15 @@ def n_seccionar(intervalo, particiones, cantidad_iteraciones):
 			cantidad_iteraciones[0] = cantidad_iteraciones[0] + 1
 			return n_seccionar(nuevoIntervalo, particiones, cantidad_iteraciones)
 
-def seccionar(intervalo, particiones, cantidad_iteraciones):
+def seccionar(intervalo, particiones, tolerancia):
 	#Definicion de variables
+	cantidad_iteraciones = 1
 	separaciones = secc(intervalo[0], intervalo[1], particiones)
 	Xr_actual = round((separaciones[0]+separaciones[len(separaciones)-1])/2, 8)
-	#error_p = abs(((Xr_actual + Xr_anterior)/Xr_anterior)*100)
 	#do_while emulado
 	conta = 1
 	while True:
-		cantidad_iteraciones[0] = cantidad_iteraciones[0] + 1
+		cantidad_iteraciones = cantidad_iteraciones + 1
 		Xr_anterior = Xr_actual
 		f_Xr = round(funcion(Xr_anterior),8)
 
@@ -54,21 +55,32 @@ def seccionar(intervalo, particiones, cantidad_iteraciones):
 				valor = valorAux
 			else:
 				separaciones = secc(separaciones[i-1], separaciones[i], particiones)
+				break
 
 		Xr_actual = round((separaciones[0]+separaciones[len(separaciones)-1])/2, 8)
 		error_p = abs(round(((Xr_actual - Xr_anterior)/Xr_actual)*100, 8))
-		#print("ante", Xr_anterior, "actua", Xr_actual, "error", error_p, "--", separaciones)
-		if(error_p <= 1):
-			return Xr_actual
+		if(error_p <= tolerancia):
+			return [Xr_actual, cantidad_iteraciones, error_p]
 
 
 
-intervalo = [10, 20]
+intervalo = [12, 16]
+tolerancia = 1 #1%
 print("Intervalo de 10 a 20")
+#3 secciones
+cantidad_secciones = 3
+resultados = seccionar(intervalo, cantidad_secciones, tolerancia) #La tolerancia se mide en porcentajes
+print(cantidad_secciones, "secciones")
+print("\tXr:", resultados[0])
+print("\tcantidad_iteraciones:", resultados[1])
+print("\tError porcentual:", resultados[2], "%")
+
+#4 secciones
 cantidad_secciones = 4
-cantidad_iteraciones = [0]
-print("Respuesta con 3 secciones:", seccionar(intervalo, cantidad_secciones, cantidad_iteraciones), "+- 0.00000001")
-print("cantidad_iteraciones:", cantidad_iteraciones)
-cantidad_secciones = 4
-print("Respuesta con 4 secciones:", n_seccionar(intervalo, cantidad_secciones, cantidad_iteraciones), "+- 0.00000001")
-print("cantidad_iteraciones:", cantidad_iteraciones)
+resultados = seccionar(intervalo, cantidad_secciones, tolerancia) #La tolerancia se mide en porcentajes
+print(cantidad_secciones, "secciones")
+print("\tXr:", resultados[0])
+print("\tcantidad_iteraciones:", resultados[1])
+print("\tError porcentual:", resultados[2], "%")
+
+print("\n\nValor Exacto:", n_seccionar(intervalo, cantidad_secciones, [0]))
