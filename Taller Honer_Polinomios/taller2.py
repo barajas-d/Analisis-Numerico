@@ -1,4 +1,3 @@
-import math
 
 def horner(x, polinomio, redondeo):
     #Caso Base
