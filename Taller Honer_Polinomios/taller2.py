@@ -13,11 +13,9 @@ def raiz(polinomio, rango, paso, redondeo):
     fin = []
     inicio = rango[0]
     while(inicio != rango[1]):
-        print(inicio)
         datos = polinomio[:]
         inicio = round(inicio + paso, 3)
         evaluacion = horner(inicio, datos, redondeo)
-        print("Evaluacion", evaluacion)
         if(evaluacion == 0):
             fin.append(inicio)
     return fin
