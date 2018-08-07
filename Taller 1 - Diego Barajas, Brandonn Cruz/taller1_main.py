@@ -24,8 +24,8 @@ print("\tcantidad operaciones:", derivada_horner[1])
 #----------------------------------------------------------------------------------------------------
 #EJERCICIO_2
 print("\nEJERCICIO 2\n")
-intervalo = [0, 20]
-tolerancia = 1 #1%
+intervalo = [0, 30]
+tolerancia = 0.0001 #1%
 print("Intervalo de", intervalo[0], "a", intervalo[1])
 x = 32
 y = 24
@@ -70,17 +70,6 @@ print("\tError relativo:", error_relativo(velocidad*tiempo, error_absoluto(dista
 print("\nEJERCICIO 6\n")
 print("\nn =", funcionD(73))
 
-
-#----------------------------------------------------------------------------------------------------
-#EJERCICIO_9
-print("\nEJERCICIO 9\n")
-intervalo = [-1, 5]
-#print(puntoFijo(intervalo, 1.5, 0.0001))
-r  = puntoFijo(intervalo, 1.5, 0.0001)
-print(r[0]*1000000)
-
-
-
 #--------------------------------------------------------------------------------------------------
 print("\nEJERCICIO 13\n")
 #Main Ejercicio_13
@@ -102,3 +91,12 @@ radicando = 32
 print("Para el intervalo de ", x_i, "a", x_d, "con ",redondeo, "sifras significativas")
 print("\n\tLa raiz con indice", indice, "y radicando", radicando, "es:")
 print("\t", raiz_binario(radicando, indice, redondeo, x_i, x_d, -math.inf))
+
+
+#----------------------------------------------------------------------------------------------------
+#EJERCICIO_9
+print("\nEJERCICIO 15\n")
+intervalo = [-1, 5]
+#print(puntoFijo(intervalo, 1.5, 0.0001))
+r  = puntoFijo(intervalo, 1.5, 0.0001)
+print(r[0]*1000000)

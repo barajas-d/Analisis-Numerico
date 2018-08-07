@@ -2,6 +2,11 @@
 
 from Ejercicio_1a import *
 
+
+#def funcion(x, redondeo):
+#    return round(((8*math.sin(x) - 3*math.cos(2x) - 2cos(x))/2*math.sqrt(4*(math.cos(2)**2) + (sin(x)**2) - 8*(cos(x)) - 2*sin(x) + 5)), redondeo)
+
+
 def newton(iteraciones, aproximado, redondeo):
     x = aproximado
     canti_itera = 0
