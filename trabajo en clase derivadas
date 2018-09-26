@@ -1,0 +1,51 @@
+#install.packages("pracma")
+#library("pracma")
+
+funcion <- function(x){
+  return(x*exp(x)) 
+}
+
+
+cal4.4 <- function(x, h){
+  calcular = ((1/(2*h))*(-3*funcion(x)+4*funcion(x+h)-funcion(x+2*h)))
+  #calcular = (1/2*h)*(-3*funcion(x)+4*funcion(x+h)-funcion(x+2*h))
+  return(calcular)
+}
+
+cal4.5 <- function(x, h){
+  calcular = ((1/(2*h))*(funcion(x+h)-funcion(x-h)))
+  return(calcular)
+}
+
+derivada = function(x){
+  return(exp(x)+x*exp(x))
+}
+
+derivada2 = function(){
+  return(2*exp(x)+exp(x)*x)
+}
+
+ht<-c(0.1,0.01,0.001,0.0001)
+
+x = seq(1.8, 2.2, 0.1)
+y = seq(1.8, 2.2, 0.1)
+
+for (j in ht) {
+  cat("\n---------Para h = ", j, "-----------\n\n")
+  
+  for (i in 1:5) {
+    #print(funcion(x[i]))
+    y[i] = funcion(x[i])
+    cat("\n\ncon x = ", x[i], "\n\n")
+    cat("4.4 ", cal4.4(x[i], j), "\n")
+    cat("Derivada", derivada(x[i]), "\n")
+    cat("Error ", cal4.4(x[i], j)-derivada(x[i]), "\n\n")
+    cat("4.5 ", cal4.5(x[i], j), "\n")
+    cat("Derivada", derivada(x[i]), "\n")
+    cat("Error ", cal4.4(x[i], j)-derivada(x[i]), "\n\n")
+  }
+}
+#y = rep(0, times = length(x))
+
+expresion1 = expression (x*exp(x))
+D(expresion1, "x")
