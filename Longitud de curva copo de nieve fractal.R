@@ -24,3 +24,11 @@ y = c(1, 1, 1, 3, 1, 1, 3, 4.5, 5, 7, 5, 4.5, 3, 1, 1, 3, 1, 1, 1)
 plot(x,y,type="l",bty="L",xlab="X",ylab="Y")
 points(x,y,type="o",col="Red")
 
+
+
+
+
+
+
+
+
