@@ -2,46 +2,60 @@ funcion <- function(x){
   return (x^2);
 }
 
-derivada <- function(x, h){
-  return((funcion(x+h)-funcion(x))/h);
+x <- seq(0, 1, by = 0.1)
+y <- seq(0, length(x)-1, by = 1)
+
+for (i in 1:(length(x))) {
+  y[i] = funcion(x[i])
 }
 
-
-print(derivada(6, 0.1));
-
-
-#para X^2
-x <- seq(0, 1, by = 0.25)
-y <- seq(0, 1, by = 0.25)
-
-for (i in x) {
-  val = funcion(x[i])
-  y[i] = val
-}
-
-print(x)
-print(y)
-
-trapecio <- function(x1, y1, x2, y2){
-   h = x2-x1
-   area = (h/2)*((y1+y2))
-   return(area)
-}
-
+print(integral(x, y))
 
 integral <- function(x, y){
-  #i1 = trapecio(x[1], y[1], x[4], y[4])
-  #i2 = trapecio(x[1], y[1], x[2], y[2]) + trapecio(x[2], y[2], x[4], y[4])
-  #i3 = trapecio(x[1], y[1], x[2], y[2]) + trapecio(x[2], y[2], x[3], y[3]) + trapecio(x[3], y[3], x[4], y[4])
-
-  i1 = 0.5
-  i2 = 0.375
-  i3 = 0.34375
+  
+  pivotear <- function(ini, fin){
+    val = ini + fin
+    if((val %% 2) == 0){
+      pivote = (val/2)
+    } 
+    else{
+      pivote = ((val+1)/2)
+    } 
+    return(pivote)
+  }
+  
+  trapecio <- function(x1, y1, x2, y2){
+    h = x2-x1
+    area = (h/2)*((y1+y2))
+    return(area)
+  }
+  
+  if(length(x) != length(y)){
+    stop("Los valores para 'Y' no coinciden con los valores en 'X'")
+  } else if(length(x) < 3){
+    stop("Se nesesitan mas valores para hallar la integral")
+  } else{
+    
+    posInicial = 1
+    posFinal = length(x)
+    
+    #Integral con un solo trapecio
+    i1 = trapecio(x[posInicial], y[posInicial], x[posFinal], y[posFinal])
+    #Integral con dos trapecios
+    pivote = pivotear(posInicial, posFinal)
+    i2 = trapecio(x[posInicial], y[posInicial], x[pivote], y[pivote]) + trapecio(x[pivote], y[pivote], x[posFinal], y[posFinal])
+    #Integral con tres trapecios
+    pivote1 = pivotear(posInicial, pivote)
+    pivote2 = pivotear(pivote, posFinal)
+    i3 = trapecio(x[posInicial], y[posInicial], x[pivote1], y[pivote1]) + trapecio(x[pivote1], y[pivote1], x[pivote], y[pivote]) + trapecio(x[pivote], y[pivote], x[pivote2], y[pivote2]) + trapecio(x[pivote2], y[pivote2], x[posFinal], y[posFinal])
+  }
   
   i21 = ((4/3*i2)-(1/3*i1))
   i22 = ((4/3*i3)-(1/3*i2))
 
   final = ((16/15*i22)-(1/15*i21))
+  
+  cat("la integral definida de ", x[posInicial], "a", x[posFinal], " con los valores dados es de ", final)
   
   return (final)
 }
@@ -51,9 +65,6 @@ integral <- function(x, y){
 
 
 
-print(integral(x, y))
-
-print(y[3])
-print(trapecio(x[1], y[1], x[4], y[4]))
-print(trapecio(x[1], y[1], x[2], y[2]) + trapecio(x[2], y[2], x[4], y[4]))
+print(trapecio(x[1], y[1], x[5], y[5]))
+print(trapecio(x[1], y[1], x[3], y[3]) + trapecio(x[3], y[3], x[5], y[5]))
 print(trapecio(x[1], y[1], x[2], y[2]) + trapecio(x[2], y[2], x[3], y[3]) + trapecio(x[3], y[3], x[4], y[4]))
