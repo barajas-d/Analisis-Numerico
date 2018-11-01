@@ -1,0 +1,10 @@
+Package: Richardson
+Type: Package
+Title: Extrapolacion de Richardson
+Version: 0.1.3
+Author: Diego Barajas <barajas-d@javeriana.edu.co>, Brandonn Cruz <brandonn_cruz@javeriana.edu.co>
+Maintainer: The package maintainer <barajas-d@javeriana.edu.co>
+Description: Calculate derivatives and integrals by means of Richardson's numerical method.
+License: GPL (version 2 or later)
+Encoding: UTF-8
+LazyData: true
