@@ -1,4 +1,4 @@
-richardson = function(x,y,h = 0.01,n = 3){
+derivada = function(x,y,h = 0.01,n = 3){
   require(PolynomF)
   lagrange = function(x,y,a){
     n = length(x)
